@@ -1,0 +1,28 @@
+.rounded-circle{
+    object-fit: cover;
+    object-position: center; 
+}
+
+#content {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: white;
+    -webkit-box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.28);
+}
+
+.card-title {
+    font-size: 2em;
+}
+
+.code, iframe{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: white;
+    overflow: hidden;
+    resize: none;
+}
+
+.large{
+    width: 200px;
+}
