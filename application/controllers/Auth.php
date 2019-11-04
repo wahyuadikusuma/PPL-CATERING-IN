@@ -37,14 +37,16 @@ class Auth extends CI_Controller
                 //cek password
                 if (md5($password) == $user['password']) {
                     $data = [
+                        'name' => $user['name'],
                         'email' => $user['email'],
-                        'role_id' => $user['role_id']
+                        'role_id' => $user['role_id'],
+                        'login' => true
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
                         redirect('admin');
                     } else {
-                        redirect('user');
+                        redirect('member');
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Wrong password! </div>');
@@ -63,7 +65,7 @@ class Auth extends CI_Controller
     public function registration()
     {
         if ($this->session->userdata('email')) {
-            redirect('user');
+            redirect('member');
         }
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
@@ -102,6 +104,9 @@ class Auth extends CI_Controller
             ];
 
             $this->db->insert('user', $data);
+
+
+
             $this->db->insert('user_token', $user_token);
 
             $this->_sendEmail($token, 'verify');
@@ -186,7 +191,11 @@ class Auth extends CI_Controller
     public function logout()
     {
         $this->session->unset_userdata('email');
+        $this->session->unset_userdata('username');
         $this->session->unset_userdata('role_id');
+        $this->session->unset_userdata('login');
+
+        // $this->session->sess_destroy();
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> You have been logout! </div>');
         redirect('auth');
