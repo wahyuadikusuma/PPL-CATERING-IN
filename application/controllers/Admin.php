@@ -16,10 +16,12 @@ class Admin extends CI_Controller
         $data['name'] = $this->session->userdata('name');
 
         $this->load->view('templates/header', $data);
+        //nanti di ganti yaa.. ini biar enak diliat aja
         $this->load->view('member/index', $data);
         $this->load->view('templates/footer');
     }
 
+    //mencegah member masuk
     public function forcelogout()
     {
         // $this->session->sess_destroy();
